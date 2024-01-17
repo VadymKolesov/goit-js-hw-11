@@ -44,7 +44,7 @@ function fetchImages() {
           messageLineHeight: '24px',
           backgroundColor: '#EF4040',
           messageColor: '#FAFAFB',
-          iconUrl: './img/x-octagon.svg',
+          iconUrl: 'src/img/x-octagon.svg',
           message:
             'Sorry, there are no images matching your search query. Please, try again!',
           progressBarColor: '#B51B1B',
