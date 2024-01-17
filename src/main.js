@@ -6,7 +6,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 let gallery = new SimpleLightbox('.small-image-item a');
 
 const refs = {
-  searchForm: document.querySelector('search-form'),
+  searchFormElement: document.querySelector('.search-form'),
   searchInput: document.querySelector('.search-input'),
   searchBtn: document.querySelector('.search-btn'),
   imagesMarkUp: document.querySelector('.images-markup'),
@@ -17,7 +17,7 @@ const KEY = '41860696-2902f93b7313ed5ba840414ce';
 
 let query = '';
 
-refs.searchBtn.addEventListener('click', searchQuery);
+refs.searchFormElement.addEventListener('submit', searchQuery);
 
 function searchQuery(e) {
   e.preventDefault();
@@ -44,7 +44,6 @@ function fetchImages() {
           messageLineHeight: '24px',
           backgroundColor: '#EF4040',
           messageColor: '#FAFAFB',
-          iconUrl: 'src/img/x-octagon.svg',
           message:
             'Sorry, there are no images matching your search query. Please, try again!',
           progressBarColor: '#B51B1B',
@@ -63,7 +62,18 @@ function fetchImages() {
       refs.imagesMarkUp.innerHTML = markUp;
     })
     .catch(error => {
-      console.log(`Error type is: ${error}`);
+      refs.imagesMarkUp.innerHTML = ``;
+      iziToast.error({
+        theme: 'dark',
+        position: 'topRight',
+        maxWidth: '392px',
+        messageSize: '16px',
+        messageLineHeight: '24px',
+        backgroundColor: '#EF4040',
+        messageColor: '#FAFAFB',
+        message: `Something went wrong:: ${error}`,
+        progressBarColor: '#B51B1B',
+      });
     })
     .finally(e => {
       gallery.refresh();
